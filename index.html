@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รวม Link ในการทำงาน</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>FAQ - ศูนย์รวมข้อมูลทีม CS</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     
     <base target="_blank">
@@ -83,85 +85,7 @@
             width: 100%;
         }
 
-        .main-header {
-            text-align: center;
-            font-size: 2.2em;
-            font-weight: 600; 
-            color: var(--primary-color);
-            margin-top: 10px;
-            margin-bottom: 40px; 
-            letter-spacing: 0.5px;
-        }
-
-        /* จัดดีไซน์กริดให้สมดุลสำหรับ 5 กล่อง */
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 30px; 
-        }
-
-        /* กล่องเนื้อหาหลัก */
-        .card-box {
-            background-color: var(--card-bg);
-            border: 3px solid #333333; 
-            border-radius: 12px;
-            padding: 30px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            box-sizing: border-box;
-            align-self: start; 
-        }
-
-        /* ================= หัวข้อ, คำอธิบาย และเนื้อหาในกล่อง ================= */
-        .card-box h2 {
-            width: 100%;
-            text-align: center;
-            font-size: 1.4em; 
-            font-weight: 500; 
-            color: var(--text-main);
-            margin: 0 0 5px 0;
-        }
-
-        .card-box .caption {
-            text-align: center;
-            font-size: 0.95em;
-            color: #888888; 
-            margin: 0 0 25px 0;
-            padding-bottom: 15px;
-            border-bottom: 2px dashed #e0e0e0; 
-        }
-
-        /* ================= ตกแต่งรายการ ================= */
-        .card-box ol {
-            margin: 0;
-            padding-left: 25px; 
-            font-size: 1.1em;
-            color: var(--text-muted);
-            text-align: left; 
-        }
-
-        .card-box ol li {
-            margin-bottom: 14px; 
-        }
-
-        .card-box ol li a {
-            color: var(--text-muted); 
-            text-decoration: none; 
-            transition: color 0.3s ease, text-decoration 0.3s ease;
-            display: inline-block;
-        }
-
-        .card-box ol li a:hover {
-            color: var(--primary-color); 
-            text-decoration: underline; 
-        }
-
         /* ================= Responsive (มือถือ) ================= */
-        @media (max-width: 900px) {
-            .main-header {
-                font-size: 1.8em; 
-            }
-        }
-
         @media (max-width: 768px) {
             body {
                 padding: 120px 20px 40px 20px;
@@ -191,47 +115,136 @@
 
     <div class="content-container">
         
-        <h1 class="main-header">รวม Link ในการทำงาน</h1>
-        
-        <div class="grid-layout">
+        <section class="bg-white rounded-2xl shadow-sm py-12 px-6 sm:px-10 lg:px-12 my-6">
             
-            <div class="card-box">
-                <h2>Motor</h2>
-                <p class="caption">ข้อมูลเพิ่มเติมประกันภัยรถยนต์</p>
-                <ol>
-                    </ol>
+            <div class="text-center mb-10">
+                <div class="flex justify-center mb-4">
+                    <svg class="w-10 h-10 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-4">
+                    Got Questions?<br>We've Got Answers
+                </h2>
+                <p class="text-base text-gray-500 max-w-xl mx-auto">
+                    Find answers to common queries and get the information you need to navigate your journey with confidence
+                </p>
             </div>
 
-            <div class="card-box">
-                <h2>Health</h2>
-                <p class="caption">ข้อมูลเพิ่มเติมประกันสุขภาพ</p>
-                <ol>
-                    </ol>
+            <div class="flex justify-center mb-8">
+                <div class="bg-gray-100 p-1 rounded-full flex inline-flex space-x-1">
+                    <button onclick="switchTab('design', this)" class="tab-btn bg-white text-gray-900 shadow-sm px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Design</button>
+                    <button onclick="switchTab('service', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Service</button>
+                    <button onclick="switchTab('pricing', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Pricing</button>
+                </div>
             </div>
 
-            <div class="card-box">
-                <h2>Crescent Health</h2>
-                <p class="caption">ข้อมูลเฉพาะสำหรับโปรเจกต์ Crescent</p>
-                <ol>
-                    </ol>
-            </div>
+            <div id="faq-container" class="relative">
+                
+                <div id="faq-design" class="faq-group space-y-4 transition-opacity duration-300 opacity-100">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
+                            <span class="font-medium text-gray-900">How do I schedule a design consultation with Koala Studio?</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-content px-6 pb-4 hidden text-gray-600 text-sm leading-relaxed">
+                            <p>Simply reach out to our team via the contact form or give us a call. We'll set up a time that works for you.</p>
+                        </div>
+                    </div>
 
-            <div class="card-box">
-                <h2>System</h2>
-                <p class="caption">ระบบในการทำงาน</p>
-                <ol>
-                    </ol>
-            </div>
+                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
+                            <span class="font-medium text-gray-900">What types of design services does Koala Studio offer?</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-content px-6 pb-4 text-gray-600 text-sm leading-relaxed">
+                            <p>At our agency, we take pride in our distinctive personalized approach, meticulous attention to detail, and our unwavering commitment to delivering unparalleled designs that surpass client expectations.</p>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="card-box">
-                <h2>Customer Service</h2>
-                <p class="caption">ตารางงานและระบบบริหารจัดการ</p>
-                <ol>
-                    </ol>
-            </div>
+                <div id="faq-service" class="faq-group space-y-4 hidden transition-opacity duration-300 opacity-0">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
+                            <span class="font-medium text-gray-900">Do you provide ongoing maintenance services?</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-content px-6 pb-4 hidden text-gray-600 text-sm leading-relaxed">
+                            <p>Yes, we offer monthly retainers and maintenance packages to ensure your project stays up to date and functional.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
+                            <span class="font-medium text-gray-900">Can I request revisions after the final delivery?</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-content px-6 pb-4 hidden text-gray-600 text-sm leading-relaxed">
+                            <p>We typically include two rounds of revisions in our standard service agreement. Additional revisions can be requested at an hourly rate.</p>
+                        </div>
+                    </div>
+                </div>
 
-        </div>
+                <div id="faq-pricing" class="faq-group space-y-4 hidden transition-opacity duration-300 opacity-0">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
+                            <span class="font-medium text-gray-900">How much does a typical project cost?</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-content px-6 pb-4 hidden text-gray-600 text-sm leading-relaxed">
+                            <p>Pricing varies greatly depending on the scope of work. We recommend booking a free discovery call so we can provide a customized quote.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </div>
 
+    <script>
+        // ฟังก์ชันเปิด/ปิดกล่องคำถาม
+        function toggleFAQ(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('svg');
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // ฟังก์ชันสลับแท็บพร้อม Effect Fade
+        function switchTab(tabName, clickedButton) {
+            // 1. สลับสถานะไฮไลท์ของปุ่มแท็บ
+            const allButtons = document.querySelectorAll('.tab-btn');
+            allButtons.forEach(btn => {
+                btn.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+                btn.classList.add('text-gray-500');
+            });
+            clickedButton.classList.remove('text-gray-500');
+            clickedButton.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+
+            // 2. จัดการเฟดซ่อนเนื้อหาเดิมและแสดงเนื้อหาใหม่
+            const allFaqGroups = document.querySelectorAll('.faq-group');
+            
+            allFaqGroups.forEach(group => {
+                group.classList.add('hidden');
+                group.classList.remove('opacity-100');
+                group.classList.add('opacity-0');
+            });
+
+            const targetFaq = document.getElementById('faq-' + tabName);
+            targetFaq.classList.remove('hidden');
+            
+            // ใช้ setTimeout เพื่อสร้างจังหวะให้ CSS Opacity ทำงานจนเกิด Effect Fade อินขึ้นมาอย่างนุ่มนวล
+            setTimeout(() => {
+                targetFaq.classList.remove('opacity-0');
+                targetFaq.classList.add('opacity-100');
+            }, 50);
+        }
+    </script>
 </body>
 </html>
