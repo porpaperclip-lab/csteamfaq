@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รวม Link ในการทำงาน</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <base target="_blank">
+    
+    <style>
+        /* ================= ตัวแปรสีและขนาด ================= */
+        :root {
+            --primary-color: #1a73e8;
+            --primary-hover: #1557b0; 
+            --bg-color: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #5f6368;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px 40px calc(var(--sidebar-width) + 40px); 
+        }
+
+        /* ================= Navbar ด้านซ้าย ================= */
+        .navbar {
+            background-color: var(--card-bg);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 15px;
+            padding: 30px 20px;
+            z-index: 1000;
+            box-sizing: border-box;
+            overflow-y: auto;   
+        }
+
+        .menu-header {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--primary-color);
+            padding: 0 16px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .navbar a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 12px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .navbar a:hover {
+            background-color: #f1f3f4;
+            color: var(--primary-color);
+        }
+
+        /* ================= เลย์เอาต์หลัก ================= */
+        .content-container {
+            max-width: 1100px; 
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .main-header {
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: 600; 
+            color: var(--primary-color);
+            margin-top: 10px;
+            margin-bottom: 40px; 
+            letter-spacing: 0.5px;
+        }
+
+        /* จัดดีไซน์กริดให้สมดุลสำหรับ 5 กล่อง */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+        }
+
+        /* กล่องเนื้อหาหลัก */
+        .card-box {
+            background-color: var(--card-bg);
+            border: 3px solid #333333; 
+            border-radius: 12px;
+            padding: 30px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+            align-self: start; 
+        }
+
+        /* ================= หัวข้อ, คำอธิบาย และเนื้อหาในกล่อง ================= */
+        .card-box h2 {
+            width: 100%;
+            text-align: center;
+            font-size: 1.4em; 
+            font-weight: 500; 
+            color: var(--text-main);
+            margin: 0 0 5px 0;
+        }
+
+        .card-box .caption {
+            text-align: center;
+            font-size: 0.95em;
+            color: #888888; 
+            margin: 0 0 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #e0e0e0; 
+        }
+
+        /* ================= ตกแต่งรายการ ================= */
+        .card-box ol {
+            margin: 0;
+            padding-left: 25px; 
+            font-size: 1.1em;
+            color: var(--text-muted);
+            text-align: left; 
+        }
+
+        .card-box ol li {
+            margin-bottom: 14px; 
+        }
+
+        .card-box ol li a {
+            color: var(--text-muted); 
+            text-decoration: none; 
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+            display: inline-block;
+        }
+
+        .card-box ol li a:hover {
+            color: var(--primary-color); 
+            text-decoration: underline; 
+        }
+
+        /* ================= Responsive (มือถือ) ================= */
+        @media (max-width: 900px) {
+            .main-header {
+                font-size: 1.8em; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 120px 20px 40px 20px;
+            }
+            .navbar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 15px 20px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="menu-header">MENU</div>
+        <a href="https://porpaperclip-lab.github.io/csteamknowledgebase/#">🏠 ศูนย์รวมข้อมูลทีม CS</a>
+        <a href="https://porpaperclip-lab.github.io/csteam-trainer/">📊 โครงสร้างผลิตภัณฑ์</a>
+        <a href="https://porpaperclip-lab.github.io/emailbriefing">📧 อีเมลประกาศสำคัญ</a>
+        <a href="https://porpaperclip-lab.github.io/consolidatework-relatedlinks/">🔗 รวม Link ในการทำงาน</a>
+    </nav>
+
+    <div class="content-container">
+        
+        <h1 class="main-header">รวม Link ในการทำงาน</h1>
+        
+        <div class="grid-layout">
+            
+            <div class="card-box">
+                <h2>Motor</h2>
+                <p class="caption">ข้อมูลเพิ่มเติมประกันภัยรถยนต์</p>
+                <ol>
+                    </ol>
+            </div>
+
+            <div class="card-box">
+                <h2>Health</h2>
+                <p class="caption">ข้อมูลเพิ่มเติมประกันสุขภาพ</p>
+                <ol>
+                    </ol>
+            </div>
+
+            <div class="card-box">
+                <h2>Crescent Health</h2>
+                <p class="caption">ข้อมูลเฉพาะสำหรับโปรเจกต์ Crescent</p>
+                <ol>
+                    </ol>
+            </div>
+
+            <div class="card-box">
+                <h2>System</h2>
+                <p class="caption">ระบบในการทำงาน</p>
+                <ol>
+                    </ol>
+            </div>
+
+            <div class="card-box">
+                <h2>Customer Service</h2>
+                <p class="caption">ตารางงานและระบบบริหารจัดการ</p>
+                <ol>
+                    </ol>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
