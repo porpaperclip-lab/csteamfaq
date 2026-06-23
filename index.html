@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+
     <style>
         /* ================= ตัวแปรสีและขนาด ================= */
         :root {
@@ -115,7 +117,7 @@
         
         <section class="bg-white rounded-2xl shadow-sm py-12 px-6 sm:px-10 lg:px-12 my-6">
             
-            <div class="text-center mb-10">
+            <div class="text-center mb-6">
                 <div class="flex justify-center mb-4">
                     <svg class="w-10 h-10 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
@@ -125,26 +127,37 @@
                     คุณมีคำถาม?<br>เรามีคำตอบ
                 </h2>
                 <p class="text-base text-gray-500 max-w-xl mx-auto">
-                    ค้นหาคำถามตามหมวดหมู่ด้านล่าง
+                    ค้นหาคำถาม คีย์เวิร์ด หรือคำใกล้เคียงที่ต้องการทราบจากช่องค้นหาด้านล่าง
                 </p>
             </div>
 
-            <div class="flex justify-center mb-8">
-                <div class="bg-gray-100 p-1 rounded-full flex space-x-1">
-                    <button onclick="switchTab('Motor Claim', this)" class="tab-btn bg-white text-gray-900 shadow-sm px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Motor Claim</button>
-                    <button onclick="switchTab('Motor General', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Motor General</button>
-                    <button onclick="switchTab('Health Claim', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Health Claim</button>
-                    <button onclick="switchTab('Health General', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Health General</button>
-                    <button onclick="switchTab('Gadget', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Gadget</button>
-                    <button onclick="switchTab('Crescent Health', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Crescent Health</button>
-                    <button onclick="switchTab('Other', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200">Other</button>
+            <div class="mb-8 max-w-xl mx-auto">
+                <div class="relative rounded-md shadow-sm">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                        <span class="material-symbols-outlined text-gray-400" style="font-size: 22px;">search</span>
+                    </div>
+                    <input type="text" id="searchInput" 
+                           class="block w-full rounded-full border border-gray-300 bg-gray-50 py-3 pl-12 pr-4 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 outline-none transition-all shadow-sm" 
+                           placeholder="พิมพ์คำค้นหา (เช่น เงิน, มอไซค์, เคม, รพ, ต่างด้าว)...">
+                </div>
+            </div>
+
+            <div id="tabNavigationContainer" class="flex justify-center mb-8 transition-opacity duration-200">
+                <div class="bg-gray-100 p-1 rounded-full flex space-x-1 overflow-x-auto max-w-full">
+                    <button onclick="switchTab('Motor Claim', this)" class="tab-btn bg-white text-gray-900 shadow-sm px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200 whitespace-nowrap">Motor Claim</button>
+                    <button onclick="switchTab('Motor General', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200 whitespace-nowrap">Motor General</button>
+                    <button onclick="switchTab('Health Claim', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200 whitespace-nowrap">Health Claim</button>
+                    <button onclick="switchTab('Health General', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200 whitespace-nowrap">Health General</button>
+                    <button onclick="switchTab('Gadget', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200 whitespace-nowrap">Gadget</button>
+                    <button onclick="switchTab('Crescent Health', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200 whitespace-nowrap">Crescent Health</button>
+                    <button onclick="switchTab('Other', this)" class="tab-btn text-gray-500 hover:text-gray-900 px-6 py-2 rounded-full text-sm font-medium focus:outline-none transition-all duration-200 whitespace-nowrap">Other</button>
                 </div>
             </div>
 
             <div id="faq-container" class="relative">
                 
                 <div id="faq-Motor Claim" class="faq-group space-y-4 transition-opacity duration-300 opacity-100">
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="รถ มอเตอร์ไซค์ รถเครื่อง อู่ นอกเครือ คุมราคา ใบเคลม">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารคุมราคารถยนต์ และ รถจักรยานยนต์</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -162,7 +175,7 @@
                         </div>
                     </div>
                     
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="เงิน สำรองจ่าย พรบ โรงพยาบาล รักษา แพทย์ โอน บัญชี รพ">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารตั้งเบิกค่ารักษาพยาบาล พ.ร.บ.</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -182,7 +195,7 @@
                         </div>
                     </div>
                     
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="บ้าน ทรัพย์สิน เสียหาย พัง ช่าง ซ่อม ประเมินราคา ห้างร้าน">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารคุมราคาทรัพย์สิน</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -199,7 +212,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="รถลาก รถสไลด์ รถยก เสีย เงิน คืนเงิน ใบเสร็จ บิล ไปรษณีย์">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารคุมราคารถยก (ตั้งเบิกค่ารถยก)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -219,7 +232,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="คู่กรณี ขาดประโยชน์ เงินทดแทน รถชน สัญญาเช่า สรุปยอด">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารในการเรียกร้องค่าขาดผลประโยชน์ในการใช้รถ (คู่กรณี)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -248,7 +261,7 @@
                         </div>
                     </div>
 
-                     <div class="bg-gray-50 rounded-lg overflow-hidden">
+                     <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="เจ็บ บาดเจ็บ คู่กรณี รักษา ใบเสร็จ สลิปเงินเดือน">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารในการเรียกร้องค่าขาดผลประโยชน์ในกรณีบาดเจ็บ (คู่กรณี)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -265,7 +278,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ส่งเอกสาร ไปรษณีย์ ที่อยู่ บางรัก เลขภาษี อีเมล">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ช่องทางในการส่งเอกสารสินไหมรถยนต์และสินไหม พ.ร.บ.</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -281,7 +294,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ยกเลิกแคมเปญ คืนเงิน ส่วนลด โอนเงิน ไลน์ แอดไลน์">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ขั้นตอนในการออกจากแคมเปญ "ขับขี่ปลอดภัยได้ส่วนลด (No Dry Claim)"</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -291,11 +304,11 @@
                             1.CS แจ้งเงื่อนไขการเข้าแคมเปญ "ขับขี่ปลอดภัยได้ส่วนลด" ให้ลูกค้าทราบก่อน และแจ้งจำนวนส่วนลดที่ลูกค้าต้องคืน (ตรวจสอบใน Backoffice Retail)<br>
                             2.แจ้งลูกค้าแอดไลน์ @easysunday เพื่อเจ้าหน้าที่จะส่งเลขที่บัญชีให้ลูกค้า  และให้ลูกค้าส่งหลักฐานการโอนเงินเข้ามาให้ทางไลน์<br>
                             3.CS เปิด SF  มาโคร : Motor-ยกเลิกการเข้าแคมเปญ ขับขี่ปลอดภัย ได้ส่วนลด<br>
-                            4.หลังจากที่ลูกค้าส่งหลักฐานการโอนเงินเข้ามาแล้วทางทีมหลีดจะดำเนินการต่อ</p>
+                            4.afterที่ลูกค้าส่งหลักฐานการโอนเงินเข้ามาแล้วทางทีมหลีดจะดำเนินการต่อ</p>
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="หน้างาน ผิดเงื่อนไข ระบุผู้ขับขี่ คู่กรณี ผิด โอนเงิน ค่าปรับ">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ขั้นตอนการเรียกร้องหน้างาน และค่าผิดเงื่อนไขในกรณีระบุผู้ขับขี่</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -315,7 +328,7 @@
                         </div>
                     </div>
 
-                     <div class="bg-gray-50 rounded-lg overflow-hidden">
+                     <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="มอบอำนาจ ทำแทน เซ็น สำเนา อุบัติเหตุ กระดาษ A4 อู่">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">การมอบอำนาจในการดำเนินการเคลม</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -329,7 +342,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ยกเลิกเคลม ไม่ซ่อมแล้ว ใบเคลมหาย ไลน์ คดี">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ลูกค้าต้องการยกเลิกเคลม กรณีลูกค้าได้รับใบเคลมแล้ว</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -362,7 +375,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="กี่วัน คืนเงิน จ่ายเงิน สำรองจ่าย อู่ นอกเครือ วันทำการ">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ระยะเวลาในการทำจ่ายค่าซ่อมรถ (กรณีสำรองจ่าย)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -376,7 +389,7 @@
                         </div>
                     </div>
 
-                     <div class="bg-gray-50 rounded-lg overflow-hidden">
+                     <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ย้ายอู่ เปลี่ยนอู่ เปลี่ยนศูนย์ อะไหล่นาน คุมราคา">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">กรณีลูกค้าต้องการเปลี่ยนศูนย์ / อู่ซ่อมในการซ่อม</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -396,7 +409,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ใบเคลมหาย หาย แจ้งความ โรงพัก บันทึกประจำวัน ไปรษณีย์">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ลูกค้าทำใบเคลมตัวจริงหาย</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -418,7 +431,7 @@
                 </div> 
 
                 <div id="faq-Motor General" class="faq-group space-y-4 hidden transition-opacity duration-300 opacity-0">
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ต่ออายุ ประกัน หมดอายุ รถน้ำมัน อีวี ev รถไฟฟ้า ob โบรคเกอร์">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">แนวทางการประสานงานการต่ออายุกรมธรรม์รถยนต์</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -442,7 +455,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="จ่ายเงิน ค่าเบี้ย ผ่อน จ่ายสด บัตรเครดิต คิวอาร์ ทรูมันนี่ เซลล์">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ต้องการชำระค่าเบี้ยประกันภัยรถยนต๋สามารถทำได้กี่ช่องทางอะไรบ้าง?</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -469,7 +482,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ยกเลิกประกัน คืนเงิน เลิกสัญญา ทะเบียนรถ ไปรษณีย์">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ลูกค้าต้องการยกเลิกกรมธรรม์รถยนต์ต้องทำอย่างไร?</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -491,7 +504,7 @@
                         </div>
                     </div>
 
-                     <div class="bg-gray-50 rounded-lg overflow-hidden">
+                     <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="กี่ปี ปีรถ อายุ ซ่อมห้าง ซ่อมอู่ ไม่รับประกัน">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">อายุรถที่สามารถทำประกันกับบริษัทได้</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -508,7 +521,7 @@
                 </div> 
                 
                 <div id="faq-Health Claim" class="faq-group space-y-4 hidden transition-opacity duration-300 opacity-0">
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ป่วย รักษาพยาบาล หมอ สำรองจ่าย ใบรับรองแพทย์ ใบเสร็จ">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารประกอบการเรียกร้องค่าสินไหมทดแทนค่ารักษาพยาบาล</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -522,7 +535,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="นอนโรงพยาบาล ผู้ป่วยใน ค่าชดเชย สิทธิ์ ชดเชยรายได้">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารประกอบการเรียกร้องค่าชดเชยการเข้ารักษาในโรงพยาบาล (กรณีผู้ป่วยใน)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -536,7 +549,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ตาย เสียชีวิต มรณกรรม ทายาท ใบมรณกรรม โรงพยาบาล">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารประกอบการเรียกร้องค่าสินไหมทดแทนมรณกรรม (เสียชีวิต)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -552,7 +565,7 @@
                         </div>
                     </div>
                     
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="พิการ ทุพพลภาพ อวัยวะขาด รูปถ่าย ประวัติการรักษา">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารประกอบการเรียกร้องค่าสินไหมทดแทนกรณีทุพพลภาพถาวร (ยังสามารถทำงานได้)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -569,7 +582,7 @@
                         </div>
                     </div>
 
-                     <div class="bg-gray-50 rounded-lg overflow-hidden">
+                     <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="พิการสิ้นเชิง ทำงานไม่ได้ ตำรวจ บันทึกประจำวัน เต็มตัว">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เอกสารประกอบการเรียกร้องค่าสินไหมทดแทนกรณีสูญเสียอวัยวะ (ไม่สามารถทำงานได้)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -586,7 +599,7 @@
                         </div>
                     </div>
 
-                     <div class="bg-gray-50 rounded-lg overflow-hidden">
+                     <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ช่องทางเคลม แอพพลิเคชัน jolly อีเมล ฝ่ายบุคคล ไปรษณีย์">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ช่องทางในการยื่นเคลมประกันสุขภาพ</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -606,7 +619,7 @@
                 </div>
 
                 <div id="faq-Health General" class="faq-group space-y-4 hidden transition-opacity duration-300 opacity-0">
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ต่างด้าว นายจ้าง เปลี่ยนแปลงข้อมูล เบอร์โทร bd mol">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">กรมธรรม์ประกันภัยแรงงานต่างด้าว (MOL)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -619,7 +632,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="รายเดี่ยว สุขภาพ ต่ออายุ sms คุ้มครอง โบรคเกอร์">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">แนวทางการประสานงานการต่ออายุกรมธรรม์ประกันสุขภาพรายเดี่ยว</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -641,7 +654,7 @@
                  </div>
 
                 <div id="faq-Gadget" class="faq-group space-y-4 hidden transition-opacity duration-300 opacity-0">
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="ราคา เงิน มือถือ อุปกรณ์ แกดเจ็ต project cost">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">How much does a typical project cost?</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -653,7 +666,7 @@
                 </div>
 
                 <div id="faq-Crescent Health" class="faq-group space-y-4 hidden transition-opacity duration-300 opacity-0">
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="แฟกซ์ เวลาทำการ เปิดปิด โรงพยาบาล ป่วยใน เคลม fax">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">เวลาการให้บริการ Fax Claim (กรณีผู้ป่วยใน)</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -668,7 +681,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="อีเมลโรงพยาบาล ในเครือ ประเมินค่าใช้จ่าย วางบิล จ่ายเงิน">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">ช่องทางในการให้โรงพยาบาลในเครือส่งเอกสารเพื่อพิจารณาเข้ามาที่ฝ่ายสินไหม</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -683,7 +696,7 @@
                 </div>
 
                 <div id="faq-Other" class="faq-group space-y-4 hidden transition-opacity duration-300 opacity-0">
-                    <div class="bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 rounded-lg overflow-hidden" data-synonyms="อื่นๆ ราคา project cost อื่นๆ">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
                             <span class="font-medium text-gray-900">How much does a typical project cost?</span>
                             <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -695,11 +708,21 @@
                 </div>
 
             </div>
+
+            <div id="noDataMessage" class="hidden text-center py-12 text-gray-400 text-sm">
+                <span class="material-symbols-outlined block text-5xl mb-3 text-gray-300">search_off</span>
+                ไม่พบข้อมูลหรือคำถามที่ตรงกับคีย์เวิร์ดของคุณ
+            </div>
+
         </section>
     </div>
 
     <script>
-        // ฟังก์ชันเปิด/ปิดกล่องคำถาม
+        let fuseEngine;
+        let indexedItems = [];
+        let currentActiveTab = 'Motor Claim'; // เก็บสถานะแท็บปัจจุบันไว้
+
+        // เปิด/ปิดกล่องคำถาม (Accordion)
         function toggleFAQ(button) {
             const content = button.nextElementSibling;
             const icon = button.querySelector('svg');
@@ -713,9 +736,18 @@
             }
         }
 
-        // ฟังก์ชันสลับแท็บพร้อม Effect Fade
+        // ฟังก์ชันสลับแท็บพร้อม Effect Fade (แก้ไขให้สัมพันธ์กับช่องค้นหา)
         function switchTab(tabName, clickedButton) {
-            // 1. สลับสถานะไฮไลท์ของปุ่มแท็บ
+            currentActiveTab = tabName;
+
+            // หากผู้ใช้กำลังพิมพ์ค้นหาอยู่ ให้ล้างช่องค้นหาก่อนเปลี่ยนแท็บ
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput.value.trim() !== "") {
+                searchInput.value = "";
+                document.querySelectorAll('.faq-group > div').forEach(item => item.classList.remove('hidden'));
+            }
+
+            // 1. สลับไฮไลท์ของปุ่มแท็บ
             const allButtons = document.querySelectorAll('.tab-btn');
             allButtons.forEach(btn => {
                 btn.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
@@ -724,9 +756,8 @@
             clickedButton.classList.remove('text-gray-500');
             clickedButton.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
 
-            // 2. จัดการเฟดซ่อนเนื้อหาเดิมและแสดงเนื้อหาใหม่
+            // 2. ซ่อนเนื้อหาเดิมและแสดงเนื้อหาใหม่
             const allFaqGroups = document.querySelectorAll('.faq-group');
-            
             allFaqGroups.forEach(group => {
                 group.classList.add('hidden');
                 group.classList.remove('opacity-100');
@@ -736,12 +767,106 @@
             const targetFaq = document.getElementById('faq-' + tabName);
             targetFaq.classList.remove('hidden');
             
-            // ใช้ setTimeout เพื่อสร้างจังหวะให้ CSS Opacity ทำงานจนเกิด Effect Fade อินขึ้นมาอย่างนุ่มนวล
             setTimeout(() => {
                 targetFaq.classList.remove('opacity-0');
                 targetFaq.classList.add('opacity-100');
             }, 50);
         }
+
+        // จัดเตรียมและสร้างดัชนีข้อมูลค้นหาอัจฉริยะตอนเว็บโหลดเสร็จ
+        document.addEventListener("DOMContentLoaded", function() {
+            const faqItems = document.querySelectorAll('.faq-group > div');
+            
+            faqItems.forEach(item => {
+                let questionText = item.querySelector('button span').textContent.toLowerCase();
+                let answerText = item.querySelector('.faq-content').textContent.toLowerCase();
+                let synonyms = item.getAttribute('data-synonyms') ? item.getAttribute('data-synonyms').toLowerCase() : '';
+                let parentGroup = item.closest('.faq-group');
+
+                indexedItems.push({
+                    element: item,
+                    parentGroup: parentGroup,
+                    text: questionText + " " + answerText,
+                    synonyms: synonyms
+                });
+            });
+
+            // คอนฟิกตัวแปรควบคุม Fuse.js
+            const options = {
+                keys: ['text', 'synonyms'],
+                threshold: 0.4, // ยิ่งค่าน้อยยิ่งต้องการความตรงตัว ค่ายอดนิยมคือ 0.4 สำหรับดักจับคำพิมพ์ผิด
+                ignoreLocation: true
+            };
+
+            fuseEngine = new Fuse(indexedItems, options);
+        });
+
+        // กลไกควบคุม Real-time Smart Search ค้นหาข้ามทุกแท็บอย่างมีประสิทธิภาพ
+        document.getElementById('searchInput').addEventListener('input', function() {
+            let queryText = this.value.trim();
+            const noDataMsg = document.getElementById('noDataMessage');
+            const tabNav = document.getElementById('tabNavigationContainer');
+            const allGroups = document.querySelectorAll('.faq-group');
+            const allItems = document.querySelectorAll('.faq-group > div');
+
+            // กรณีไม่มีคำค้นหา ให้รีเซ็ตกลับไปหน้าแท็บปกติ
+            if (queryText === '') {
+                tabNav.style.opacity = '1';
+                tabNav.style.pointerEvents = 'auto';
+                
+                allItems.forEach(item => item.classList.remove('hidden'));
+                
+                allGroups.forEach(group => {
+                    if (group.id === 'faq-' + currentActiveTab) {
+                        group.classList.remove('hidden');
+                        group.classList.remove('opacity-0');
+                        group.classList.add('opacity-100');
+                    } else {
+                        group.classList.add('hidden');
+                        group.classList.remove('opacity-100');
+                        group.classList.add('opacity-0');
+                    }
+                });
+                noDataMsg.classList.add('hidden');
+                return;
+            }
+
+            // สภาวะกำลังพิมพ์ค้นหาข้อมูล: จางแถบแท็บลงเพื่อแสดงว่าเป็นโหมดค้นหาข้ามระบบ
+            tabNav.style.opacity = '0.3';
+            tabNav.style.pointerEvents = 'none';
+
+            // ซ่อนทุกองค์ประกอบก่อนคำนวณ
+            allGroups.forEach(group => {
+                group.classList.remove('hidden'); 
+                group.classList.remove('opacity-0');
+                group.classList.add('opacity-100');
+            });
+            allItems.forEach(item => item.classList.add('hidden'));
+
+            // ประมวลผลคำผ่าน Fuse Engine
+            let results = fuseEngine.search(queryText);
+
+            if (results.length > 0) {
+                let matchedGroups = new Set();
+                
+                results.forEach(result => {
+                    result.item.element.classList.remove('hidden');
+                    matchedGroups.add(result.item.parentGroup);
+                });
+
+                // ซ่อนกลุ่มที่ไม่มีรายการย่อยตรงกับผลลัพธ์
+                allGroups.forEach(group => {
+                    if (!matchedGroups.has(group)) {
+                        group.classList.add('hidden');
+                    }
+                });
+                noDataMsg.classList.add('hidden');
+            } else {
+                // ไม่เจอเลย ให้ซ่อนทุกอย่างและแสดงกล่อง No Data
+                allGroups.forEach(group => group.classList.add('hidden'));
+                noDataMsg.classList.remove('hidden');
+            }
+        });
     </script>
 </body>
 </html>
